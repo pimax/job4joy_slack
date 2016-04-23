@@ -12,7 +12,29 @@ class MyCommand extends \PhpSlackBot\Command\BaseCommand
     }
 
     protected function execute($message, $context) {
-        $this->send($this->getCurrentChannel(), null, 'Hello !');
+        $this->send($this->getCurrentChannel(), null, 'Hello !', [
+            [
+                "pretext" =>"pre-hello",
+                "text" => "text-world"
+            ]
+        ]);
+    }
+
+
+    protected function send($channel, $username, $message, $attachments = [])
+    {
+        $response = array(
+            'id' => time(),
+            'type' => 'message',
+            'channel' => $channel,
+            'text' => (!is_null($username) ? '<@'.$username.'> ' : '').$message
+        );
+
+        if (!empty($attachments)) {
+            $response['attachments'] = $attachments;
+        }
+
+        $this->getClient()->send(json_encode($response));
     }
 
 }
