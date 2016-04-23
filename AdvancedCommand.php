@@ -3,7 +3,7 @@
 namespace pimax\slackbot;
 
 
-class AdvancedCommand
+abstract class AdvancedCommand extends \PhpSlackBot\Command\BaseCommand
 {
     protected function postMessage($token, $channel, $username, $message, $attachments = [])
     {
