@@ -24,15 +24,17 @@ abstract class FeedCommand extends AdvancedCommand
                     $url = $itm->getUrl();
                     $message = substr(strip_tags($itm->getContent()), 0, 150);
 
-                    if ($message) {
-                        $this->postMessage($token, $this->getCurrentChannel(), null, '', [
-                            [
-                                'title' => $itm->getTitle(),
-                                'title_link' => $url,
-                                'text' => $message
-                            ]
-                        ]);
+                    if (!$message) {
+                        $message = "Don't have details.";
                     }
+
+                    $this->postMessage($token, $this->getCurrentChannel(), null, '', [
+                        [
+                            'title' => $itm->getTitle(),
+                            'title_link' => $url,
+                            'text' => $message
+                        ]
+                    ]);
                 }
             } else {
                 $this->getClient()->send($this->getCurrentChannel(), null, 'Not found a new projects.');
