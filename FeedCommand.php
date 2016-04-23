@@ -10,7 +10,7 @@ abstract class FeedCommand extends AdvancedCommand
     {
         try {
             $reader = new Reader;
-            $resource = $reader->download($feed['Feed']);
+            $resource = $reader->download($feed);
             $parser = $reader->getParser(
                 $resource->getUrl(),
                 $resource->getContent(),
