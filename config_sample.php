@@ -2,6 +2,9 @@
 
 return [
     'token' => '',
+    'client_id' => '',
+    'client_secret' => '',
+    'redirect_uri' => '',
     'feeds' => [
         'all' => [
             'Title' => 'All jobs',
