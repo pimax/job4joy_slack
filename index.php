@@ -1,83 +1,20 @@
 <?php
 
 require 'vendor/autoload.php';
+require 'bootstrap.php';
 
 use PhpSlackBot\Bot;
+use pimax\slackbot\StartCommand;
+use pimax\slackbot\AllCommand;
 
 $config = []; // config
 if (file_exists(__DIR__.'/config.php')) {
     $config = include __DIR__.'/config.php';
 }
 
-class StartCommand extends \PhpSlackBot\Command\BaseCommand
-{
-    protected function configure()
-    {
-        $this->setName('start');
-    }
-
-    protected function execute($message, $context)
-    {
-        $this->postMessage($this->getCurrentChannel(), null, 'Hello! I can help you with IT projects.', [
-            [
-                'fallback' => 'all',
-                'color' => '#36a64f',
-                'title' => 'All Jobs!',
-                'text' => 'Just type "all"'
-            ],
-
-            [
-                'fallback' => 'webdev',
-                'color' => '#36a64f',
-                'title' => 'Web Development',
-                'text' => 'Just type "webdev"'
-            ],
-
-        ]);
-    }
-
-
-    protected function postMessage($channel, $username, $message, $attachments = [])
-    {
-        global $config;
-
-        $response = array(
-            'token' => $config['token'],
-            'as_user' => true,
-            'id' => time(),
-            'type' => 'message',
-            'channel' => $channel,
-            'text' => (!is_null($username) ? '<@'.$username.'> ' : '').$message
-        );
-
-        if (!empty($attachments)) {
-            $response['attachments'] = json_encode($attachments);
-        }
-
-        $url = 'https://slack.com/api/chat.postMessage';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url.'?'.http_build_query($response));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $body = curl_exec($ch);
-        if ($body === false) {
-            throw new \Exception('Error when requesting '.$url.' '.curl_error($ch));
-        }
-        curl_close($ch);
-        $response = json_decode($body, true);
-        if (is_null($response)) {
-            throw new \Exception('Error when decoding body ('.$body.').');
-        }
-        if (isset($response['error'])) {
-            throw new \Exception($response['error']);
-        }
-
-
-        return $response;
-    }
-
-}
 
 $bot = new Bot();
 $bot->setToken($config['token']); // Get your token here https://my.slack.com/services/new/bot
 $bot->loadCommand(new StartCommand());
+$bot->loadCommand(new AllCommand());
 $bot->run();
