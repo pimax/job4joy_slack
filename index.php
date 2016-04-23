@@ -4,40 +4,36 @@ require 'vendor/autoload.php';
 
 use PhpSlackBot\Bot;
 
-
 $config = []; // config
 if (file_exists(__DIR__.'/config.php')) {
     $config = include __DIR__.'/config.php';
 }
 
-class MyCommand extends \PhpSlackBot\Command\BaseCommand
+class StartCommand extends \PhpSlackBot\Command\BaseCommand
 {
     protected function configure()
     {
-        $this->setName('mycommand');
+        $this->setName('start');
     }
 
     protected function execute($message, $context)
     {
-        $res = $this->postMessage($this->getCurrentChannel(), null, 'Hello! I can help you with IT projects.', [
+        $this->postMessage($this->getCurrentChannel(), null, 'Hello! I can help you with IT projects.', [
             [
                 'fallback' => 'all',
                 'color' => '#36a64f',
-                //'pretext' => 'Hello! I can help you with IT projects.',
-                'title' => 'All Jobs!'
-            ],
-
-            [
                 'title' => 'All Jobs!',
-                'title_link' => '@job4joybot: mycommand',
+                'text' => 'Just type "all"'
             ],
 
             [
-                'text' => 'Test attachments'
-            ]
-        ]);
+                'fallback' => 'webdev',
+                'color' => '#36a64f',
+                'title' => 'Web Development',
+                'text' => 'Just type "webdev"'
+            ],
 
-        echo '<pre>', print_r($res, true), '</pre>';
+        ]);
     }
 
 
@@ -83,5 +79,5 @@ class MyCommand extends \PhpSlackBot\Command\BaseCommand
 
 $bot = new Bot();
 $bot->setToken($config['token']); // Get your token here https://my.slack.com/services/new/bot
-$bot->loadCommand(new MyCommand());
+$bot->loadCommand(new StartCommand());
 $bot->run();
