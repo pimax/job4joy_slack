@@ -20,12 +20,18 @@ class MyCommand extends \PhpSlackBot\Command\BaseCommand
     protected function execute($message, $context)
     {
         $res = $this->postMessage($this->getCurrentChannel(), null, 'Hello! I can help you with IT projects.', [
-            /*[
+            [
                 'fallback' => 'all',
                 'color' => '#36a64f',
                 //'pretext' => 'Hello! I can help you with IT projects.',
                 'title' => 'All Jobs!'
-            ]*/
+            ],
+
+            [
+                'pretext' => 'pre-hello',
+                'color' => '#36a64f',
+                'text' => 'text-world'
+            ],
 
             [
                 'text' => 'Test attachments'
