@@ -50,7 +50,7 @@ class MyCommand extends \PhpSlackBot\Command\BaseCommand
         );
 
         if (!empty($attachments)) {
-            $response['attachments'] = $attachments;
+            $response['attachments'] = json_encode($attachments);
         }
 
         $url = 'https://slack.com/api/chat.postMessage';
