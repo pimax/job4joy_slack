@@ -41,7 +41,7 @@ class MyCommand extends \PhpSlackBot\Command\BaseCommand
             $response['attachments'] = $attachments;
         }
 
-        echo $response;
+        echo '<pre>', print_r($response), '</pre>';
 
         $this->getClient()->send(json_encode($response));
     }
