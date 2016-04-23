@@ -30,5 +30,5 @@ if (isset($response['error'])) {
 }
 file_put_contents(__DIR__. '/../installed/'.$response['team_id'].'.php', "<?php\nreturn " . var_export($params, true) . ";\n");
 header("Content-Type: text/html; charset=utf-8");
-exec("/usr/bin/php /home/lucky/web/luckyfeed.co/public_html/apps/slack/index.php " . $response['team_id']. " > /dev/null &");
+//exec("/usr/bin/php /home/lucky/web/luckyfeed.co/public_html/apps/slack/index.php " . $response['team_id']. " > /dev/null &");
 echo 'Job4Joy App successful installed!';
