@@ -6,18 +6,23 @@ use PhpSlackBot\Bot;
 
 class MyCommand extends \PhpSlackBot\Command\BaseCommand
 {
-
-    protected function configure() {
+    protected function configure()
+    {
         $this->setName('mycommand');
     }
 
-    protected function execute($message, $context) {
+    protected function execute($message, $context)
+    {
         $this->send($this->getCurrentChannel(), null, 'Hello! I can help you with IT projects.', [
-            [
+            /*[
                 'fallback' => 'all',
                 'color' => '#36a64f',
                 //'pretext' => 'Hello! I can help you with IT projects.',
                 'title' => 'All Jobs!'
+            ]*/
+
+            [
+                'text' => 'Test attachments'
             ]
         ]);
     }
@@ -35,6 +40,8 @@ class MyCommand extends \PhpSlackBot\Command\BaseCommand
         if (!empty($attachments)) {
             $response['attachments'] = $attachments;
         }
+
+        echo $response;
 
         $this->getClient()->send(json_encode($response));
     }
