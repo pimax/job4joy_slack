@@ -17,11 +17,20 @@ use pimax\slackbot\SoftwareCommand;
 use pimax\slackbot\TranslationsCommand;
 use pimax\slackbot\WritingCommand;
 
+$app = []; // app
 $config = []; // config
 if (file_exists(__DIR__.'/config.php')) {
     $config = include __DIR__.'/config.php';
 }
 
+if (!empty($argv[1]))
+{
+    if (file_exists('installed/'.$argv[1].'.php'))
+    {
+        $app = include 'installed/'.$argv[1].'.php';
+        $config['token'] = $app['bot']['bot_access_token'];
+    }
+}
 
 $bot = new Bot();
 $bot->setToken($config['token']); // Get your token here https://my.slack.com/services/new/bot
