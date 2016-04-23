@@ -8,7 +8,7 @@ if (file_exists(__DIR__.'/../config.php')) {
 $response = [
     'client_id' => $config['client_id'],
     'client_secret' => $config['client_secret'],
-    'code' => $config['code'],
+    'code' => $_REQUEST['code'],
     'redirect_uri' => $config['redirect_uri']
 ];
 
