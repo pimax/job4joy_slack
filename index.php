@@ -28,9 +28,8 @@ class MyCommand extends \PhpSlackBot\Command\BaseCommand
             ],
 
             [
-                'pretext' => 'pre-hello',
-                'color' => '#36a64f',
-                'text' => 'text-world'
+                'title' => 'All Jobs!',
+                'title_link' => '@job4joybot: mycommand',
             ],
 
             [
