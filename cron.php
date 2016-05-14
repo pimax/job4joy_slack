@@ -36,7 +36,10 @@ function processExists($processName)
     $exists = false;
     $result = array();
 
-    exec("ps u | grep '".$processName."'", $result);
+    exec('ps u | grep "'.$processName.'"', $result);
+
+    echo 'Process check:', print_r($result), "\n";
+
     if ((count($result) - 2) > 0)
     {
         $exists = true;
