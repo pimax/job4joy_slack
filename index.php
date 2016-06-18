@@ -23,13 +23,15 @@ if (file_exists(__DIR__.'/config.php')) {
     $config = include __DIR__.'/config.php';
 }
 
-if (!empty($argv[1]))
+if (!empty($argv[1]) && file_exists('installed/'.$argv[1].'.php'))
 {
-    if (file_exists('installed/'.$argv[1].'.php'))
-    {
-        $app = include 'installed/'.$argv[1].'.php';
-        $config['token'] = $app['bot']['bot_access_token'];
-    }
+    $app = include 'installed/'.$argv[1].'.php';
+    $config['token'] = $app['bot']['bot_access_token'];
+}
+else
+{
+    echo "Instance #".$argv[1]. " not a found!";
+    exit;
 }
 
 $bot = new Bot();
