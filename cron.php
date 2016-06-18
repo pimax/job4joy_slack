@@ -16,7 +16,7 @@ if ($handle = opendir(__DIR__.'/installed/'))
                 echo "Start team ID: ".$team."\n\n";
 
                 $result = "";
-                exec("nohup /usr/bin/php /home/lucky/web/luckyfeed.co/public_html/apps/slack/index.php ".$team." > /dev/null 2>&1 & echo $!", $result);
+                exec("/usr/bin/php /home/lucky/web/luckyfeed.co/public_html/apps/slack/index.php ".$team." > /dev/null 2>&1 & echo $!", $result);
 
                 echo print_r($result)."\n\n";
             } else {
