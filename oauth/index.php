@@ -30,4 +30,36 @@ if (isset($response['error'])) {
 }
 file_put_contents(__DIR__. '/../installed/'.$response['team_id'].'.php', "<?php\nreturn " . var_export($response, true) . ";\n");
 header("Content-Type: text/html; charset=utf-8");
-echo 'Job4Joy App successful installed!';
+echo '<h1>Job4Joy App successful installed!</h1><br/>';
+echo "You can find @job4joy_bot in your Slack team.<br />
+Just type \"start\" for start using our bot.
+
+<h2>Commands</h2>
+Our Bot understand this commands:<br />
+
+    <strong>start</strong> - Help message<br />
+
+    <strong>all</strong> - All Jobs<br />
+
+    <strong>webdev</strong> - Web Development<br />
+
+    <strong>software</strong> - Software Development & IT<br />
+
+    <strong>design</strong> - Design & Multimedia<br />
+
+    <strong>mobile</strong> - Mobile Application<br />
+
+    <strong>server</strong> - Host & Server Management<br />
+
+    <strong>writing</strong> - Writing<br />
+
+    <strong>customer</strong> - Customer Service<br />
+
+    <strong>marketing</strong> - Marketing<br />
+
+    <strong>business</strong> - Business Services<br />
+
+    <strong>translations</strong> - Translation & Languages
+
+<h2>Support</h2>
+If you have a problem with install or using our bot, write to us: admin@job4joy.com";
